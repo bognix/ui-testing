@@ -1,11 +1,12 @@
 var casper = require('casper').create({
     logLevel: 'debug',
-    verbose: 'true',
-    viewportSize: {width: 1366, height: 768}
+    verbose: 'true'
 });
 
-casper.start('http://www.wikia.com', function() {
-    this.captureSelector('lorem_pisium.png', '#globalNavigation')
+casper.start(casper.cli.options.url, function() {
+    casper.viewport(casper.cli.options.width, casper.cli.options.height, function() {
+        this.captureSelector(casper.cli.options.out, casper.cli.options.selector)
+    })
 });
 
 casper.run();

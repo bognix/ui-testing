@@ -4,7 +4,8 @@
   "description": "Tool for UI-Testing ",
   "main": "index.js",
   "scripts": {
-    "test": "gulp"
+    "test": "rm -rf images/test-output && gulp test",
+    "baseline": "rm -rf images/base-line && gulp baseline"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "gulp": "^3.8.11",
     "install": "^0.1.8",
     "npm": "^2.11.0",
+    "path": "^0.11.14",
     "require-dir": "^0.3.0",
     "resemblejs": "^1.2.1"
   }
