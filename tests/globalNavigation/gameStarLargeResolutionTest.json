@@ -1,0 +1,10 @@
+{
+  "name": "gameStarLargeResolution",
+  "viewport": {
+    "width": 1566,
+    "height": 768
+  },
+  "url": "http://de.gta.wikia.com/wiki/GTA_Wiki",
+  "selector": "#globalNavigation",
+  "baseline": "images/baselines/globalNavigation/gameStarLargeResolution.png"
+}
