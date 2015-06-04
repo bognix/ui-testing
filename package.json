@@ -20,6 +20,7 @@
   "dependencies": {
     "del": "^1.2.0",
     "express": "^4.12.4",
+    "globule": "^0.2.0",
     "gulp": "^3.8.11",
     "gulp-param": "^0.6.3",
     "install": "^0.1.8",

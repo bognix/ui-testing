@@ -1,23 +1,22 @@
 var gulp = require('gulp');
 var spawn = require('child_process').spawn;
-//var loadTestCase = require('../utils/loadTestCases');
-var loadTestCase = require('../utils/loadTestCasesNew');
+var loadTestCase = require('../utils/loadTestCases');
 var util = require('util');
 var resemble = require('node-resemble-js');
 var fs = require('fs');
 
 gulp.task('test', function() {
-    var config = JSON.parse(loadTestCase());
+    var config = loadTestCase();
     var casperProcess = 'casperjs';
 
-    for (var testCase in config) {
-        console.log(testCase);
+    for (var i=0; i < config.length; i++) {
+        var testCase = config[i];
         var args = ['casperRunner.js'];
-        args.push(util.format('--url=%s', config[testCase].url));
-        args.push(util.format('--out=%s', 'images/test-output/' + testCase + '.png'));
-        args.push(util.format('--selector=%s', config[testCase].selector));
-        args.push(util.format('--width=%s', config[testCase].viewport.width));
-        args.push(util.format('--height=%s', config[testCase].viewport.height));
+        args.push(util.format('--url=%s', testCase.url));
+        args.push(util.format('--out=%s', 'images/test-output/' + testCase.name + '.png'));
+        args.push(util.format('--selector=%s', testCase.selector));
+        args.push(util.format('--width=%s', testCase.viewport.width));
+        args.push(util.format('--height=%s', testCase.viewport.height));
 
         var casperChild = spawn(casperProcess, args);
 
@@ -36,8 +35,8 @@ gulp.task('test', function() {
                 transparency: 0.3
             });
 
-            var diff = resemble('images/test-output/' + testCase + '.png').compareTo(config[testCase].baseline).onComplete(function(data) {
-                data.getDiffImage().pack().pipe(fs.createWriteStream('diff.png'));
+            var diff = resemble('images/test-output/' + testCase.name + '.png').compareTo(testCase.baseline).onComplete(function(data) {
+                data.getDiffImage().pack().pipe(fs.createWriteStream('images/test-output/' + testCase.name + '.png'));
             });
         });
 
