@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "rm -rf images/test-output && gulp test",
-    "baseline": "rm -rf images/base-line && gulp baseline"
+    "baseline": "gulp baseline"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/bognix/ui-testing#readme",
   "dependencies": {
+    "del": "^1.2.0",
     "express": "^4.12.4",
     "gulp": "^3.8.11",
+    "gulp-param": "^0.6.3",
     "install": "^0.1.8",
     "npm": "^2.11.0",
     "path": "^0.11.14",

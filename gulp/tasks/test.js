@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var spawn = require('child_process').spawn;
-var loadTestCase = require('../utils/loadTestCases');
+//var loadTestCase = require('../utils/loadTestCases');
+var loadTestCase = require('../utils/loadTestCasesNew');
 var util = require('util');
 var resemble = require('node-resemble-js');
 var fs = require('fs');
@@ -10,6 +11,7 @@ gulp.task('test', function() {
     var casperProcess = 'casperjs';
 
     for (var testCase in config) {
+        console.log(testCase);
         var args = ['casperRunner.js'];
         args.push(util.format('--url=%s', config[testCase].url));
         args.push(util.format('--out=%s', 'images/test-output/' + testCase + '.png'));
