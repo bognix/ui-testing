@@ -8,7 +8,17 @@ var fs = require('fs');
 gulp.task('test', function() {
     var config = loadTestCase();
     var casperProcess = 'casperjs';
+    resemble.outputSettings({
+        errorColor: {
+            red: 255,
+            green: 0,
+            blue: 255
+        },
+        errorType: 'movement',
+        transparency: 0.3
+    });
 
+    var casperChild;
     for (var i=0; i < config.length; i++) {
         var testCase = config[i];
         var args = ['casperRunner.js'];
@@ -18,25 +28,15 @@ gulp.task('test', function() {
         args.push(util.format('--width=%s', testCase.viewport.width));
         args.push(util.format('--height=%s', testCase.viewport.height));
 
-        var casperChild = spawn(casperProcess, args);
+        casperChild = spawn(casperProcess, args, {detached: true});
 
         casperChild.stdout.on('data', function (data) {
             console.log('CasperJS:', data.toString().slice(0, -1));
         });
 
         casperChild.on('close', function (code) {
-            resemble.outputSettings({
-                errorColor: {
-                    red: 255,
-                    green: 0,
-                    blue: 255
-                },
-                errorType: 'movement',
-                transparency: 0.3
-            });
-
             var diff = resemble('images/test-output/' + testCase.name + '.png').compareTo(testCase.baseline).onComplete(function(data) {
-                data.getDiffImage().pack().pipe(fs.createWriteStream('images/test-output/' + testCase.name + '.png'));
+                data.getDiffImage().pack().pipe(fs.createWriteStream('images/results/' + testCase.name + '.png'));
             });
         });
 
