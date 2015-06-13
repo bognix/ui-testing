@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/bognix/ui-testing#readme",
   "dependencies": {
+    "bluebird": "^2.9.27",
     "del": "^1.2.0",
     "express": "^4.12.4",
     "globule": "^0.2.0",
