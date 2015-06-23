@@ -25,6 +25,7 @@
     "gulp": "^3.8.11",
     "gulp-param": "^0.6.3",
     "install": "^0.1.8",
+    "node-resemble-js": "0.0.4",
     "npm": "^2.11.0",
     "path": "^0.11.14",
     "require-dir": "^0.3.0",

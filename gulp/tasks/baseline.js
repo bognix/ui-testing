@@ -5,7 +5,6 @@ var util = require('util');
 var fs = require('fs');
 
 gulp.task('baseline', function(fileName) {
-    console.log(fileName);
     var testCase = loadTestCase(fileName);
     var casperProcess = 'casperjs';
 
